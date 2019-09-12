@@ -1,12 +1,11 @@
 import React from 'react';
-import './App.css';
+import SearchBar from "./Components/SearchBar";
+// import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        React JS with Github APIs
-      </header>
+      <SearchBar/>
     </div>
   );
 }
