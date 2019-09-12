@@ -14,6 +14,10 @@ describe("Search Bar", () => {
     wrapper = shallow(<SearchBar/>)
   });
 
+  it("should have a form", () => {
+    expect(wrapper.find("form").length).toBe(1);
+  })
+
   it("should have a input field", () => {
     const textField = wrapper.find(TextField)
     expect(textField.length).toBe(1);
