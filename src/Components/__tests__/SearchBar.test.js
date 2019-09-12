@@ -25,7 +25,8 @@ describe("Search Bar", () => {
   })
 
   it("should have a search button", () => {
-    expect(wrapper.find("#search-button").length).toBe(1);
-    expect(wrapper.find("#search-button").text()).toBe("Search");
+    const button = wrapper.find(Button)
+    expect(button.length).toBe(1);
+    expect(button.children().text()).toBe("Search")
   })
 })
