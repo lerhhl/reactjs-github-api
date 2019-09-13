@@ -13,11 +13,11 @@ describe("actions", () => {
         const payload = [
           {
             name: "repo1",
-            html_url: "repo1_html_url"
+            html_url: "repo1_html_url",
           },
           {
             name: "repo2",
-            html_url: "repo2_html_url"
+            html_url: "repo2_html_url",
           },
         ];
         const expectedAction = {
