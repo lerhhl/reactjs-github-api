@@ -6,7 +6,7 @@ import {
 import axios from "axios";
 import { connect } from "react-redux";
 import "./SearchBar.css"
-import { updateUserRepos } from "../actions";
+import { updateUserRepos } from "../../actions";
 
 export const SearchBar = (props) => {
   const [username, setUsername] = useState("");
