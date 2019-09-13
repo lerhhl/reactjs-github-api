@@ -12,7 +12,7 @@ const store = createStore(reducers, applyMiddleware(thunk));
 
 render((
   <Provider store={store}>
-    <App />
+    <App/>
   </Provider>
 ), document.getElementById("root"));
 

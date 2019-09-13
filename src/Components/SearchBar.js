@@ -4,9 +4,11 @@ import {
   Button,
 } from '@material-ui/core/';
 import axios from "axios";
+import { connect } from "react-redux";
 import "./SearchBar.css"
+import { updateUserRepos } from "../actions";
 
-export const SearchBar = () => {
+export const SearchBar = (props) => {
   const [username, setUsername] = useState("");
   const [disabled, setDisabled] = useState(true);
 
@@ -26,6 +28,7 @@ export const SearchBar = () => {
             })
           })
         }
+        props.updateUserRepos(repositories)
         setDisabled(false)
       })
       .catch((err) => {
@@ -51,7 +54,7 @@ export const SearchBar = () => {
         label="Username"
         InputLabelProps={{shrink: true}}
         value={username}
-        placeholder="e.g. lerhhl"
+        placeholder="GitHub username"
         onChange={handleChange}
         error={username === ""}
         helperText={username === "" ? "username cannot be empty" : ""}
@@ -71,4 +74,6 @@ export const SearchBar = () => {
   )
 }
 
-export default SearchBar;
+export default connect(null, {
+  updateUserRepos,
+})(SearchBar);

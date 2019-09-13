@@ -13,14 +13,14 @@ let wrapper;
 
 describe("SearchBar", () => {
   beforeEach(() => {
-    wrapper = shallow(<SearchBar/>)
+    wrapper = shallow(<SearchBar updateUserRepos={jest.fn()}/>)
   });
 
   describe("form", () => {
     it("should render successfully", () => {
       expect(wrapper.find("form").length).toBe(1);
     });
-  })
+  });
 
   describe("input field", () => {
     it("should render successfully", () => {
@@ -46,6 +46,6 @@ describe("SearchBar", () => {
         .simulate("submit", { preventDefault: jest.fn() });
       expect(axios.get).toHaveBeenCalledTimes(1);
       expect(axios.get).toHaveBeenCalledWith("https://api.github.com/users/username/repos");
-    })
-  })
-})
+    });
+  });
+});
