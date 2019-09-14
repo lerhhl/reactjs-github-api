@@ -1,7 +1,9 @@
 import {
   repo1,
   repo2,
-} from "./responses.js"
+  org1,
+  org2,
+} from "./responses.js";
 
 export default {
   get: jest.fn((url) => {
@@ -11,13 +13,21 @@ export default {
       data = {
         data: [
           repo1,
-          repo2
-        ]
+          repo2,
+        ],
+      };
+      break;
+    case "https://api.github.com/users/username/orgs":
+      data = {
+        data: [
+          org1,
+          org2,
+        ],
       };
       break;
     default:
       data = { data: [] };
-    }
+    };
     return Promise.resolve(data);
   }),
 };
