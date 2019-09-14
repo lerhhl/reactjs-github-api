@@ -24,7 +24,6 @@ export const SearchBar = (props) => {
         let orgs = responses[1];
         props.updateUserRepos(repositories);
         props.updateUserOrgs(orgs);
-        console.log('orgs', orgs)
         setDisabled(false);
       })
       .catch((err) => {
