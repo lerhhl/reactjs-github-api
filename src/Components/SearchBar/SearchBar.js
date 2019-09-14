@@ -71,12 +71,13 @@ export const SearchBar = (props) => {
   };
 
   function handleChange(event) {
-    const newUsername = event.target.value;
+    // Allow alphanumeric and dash only
+    const newUsername = event.target.value.replace(/[^a-zA-Z0-9-]/, "");
     let isEmpty = false;
     if (newUsername === "") {
       isEmpty = true
     }
-    setUsername(event.target.value);
+    setUsername(newUsername);
     setDisabled(isEmpty);
   };
 
