@@ -18,7 +18,7 @@ export function ReposSection(props) {
 
   return (
     <Paper className="repos-section">
-      <h3>List of repos ({repos.length})</h3>
+      <h3>List of repositories ({repos.length})</h3>
       { 
         repos.length > 0 ? (
           repos.map((repo, index) => {
@@ -35,7 +35,7 @@ export function ReposSection(props) {
           })
         ) : (
           <div className="no-repo-text">
-            No repos
+            No repository
           </div>
         )
       }
