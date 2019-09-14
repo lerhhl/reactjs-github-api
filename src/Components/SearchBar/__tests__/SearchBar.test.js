@@ -13,7 +13,7 @@ let wrapper;
 
 describe("SearchBar", () => {
   beforeEach(() => {
-    wrapper = shallow(<SearchBar updateUserRepos={jest.fn()}/>)
+    wrapper = shallow(<SearchBar updateUserRepos={jest.fn()} updateUserOrgs={jest.fn()}/>)
   });
 
   describe("form", () => {
@@ -44,8 +44,9 @@ describe("SearchBar", () => {
       wrapper
         .find("form")
         .simulate("submit", { preventDefault: jest.fn() });
-      expect(axios.get).toHaveBeenCalledTimes(1);
+      expect(axios.get).toHaveBeenCalledTimes(2);
       expect(axios.get).toHaveBeenCalledWith("https://api.github.com/users/username/repos");
+      expect(axios.get).toHaveBeenCalledWith("https://api.github.com/users/username/orgs");
     });
   });
 });

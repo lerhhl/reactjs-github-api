@@ -6,7 +6,10 @@ import {
 import axios from "axios";
 import { connect } from "react-redux";
 import "./SearchBar.css"
-import { updateUserRepos } from "../../actions";
+import {
+  updateUserRepos,
+  updateUserOrgs,
+} from "../../actions";
 
 export const SearchBar = (props) => {
   const [username, setUsername] = useState("");
@@ -15,16 +18,21 @@ export const SearchBar = (props) => {
   function handleSearch(event) {
     setDisabled(true);
     event.preventDefault();
-    Promise.all([fetchUserRepos()])
+    Promise.all([fetchUserRepos(), fetchUserOrgs()])
       .then(responses => {
         let repositories = responses[0];
-        props.updateUserRepos(repositories)
-        setDisabled(false)
+        let orgs = responses[1];
+        props.updateUserRepos(repositories);
+        props.updateUserOrgs(orgs);
+        console.log('orgs', orgs)
+        setDisabled(false);
       })
       .catch((err) => {
         console.log(err);
+        props.updateUserRepos([]);
+        props.updateUserOrgs([]);
       });
-  }
+  };
 
   function fetchUserRepos() {
     return axios.get(`https://api.github.com/users/${username}/repos`)
@@ -37,12 +45,31 @@ export const SearchBar = (props) => {
             repositories.push({
               name: repository.name,
               html_url: repository.html_url,
-            })
-          })
-        }
+            });
+          });
+        };
         return repositories;
       });
-  }
+  };
+
+  function fetchUserOrgs() {
+    return axios.get(`https://api.github.com/users/${username}/orgs`)
+      .then((response) => {
+        const orgsData = response.data;
+        let orgs = [];
+        if (orgsData && orgsData.length > 0) {
+          // Get organisation's name and html_url
+          orgsData.forEach(org => {
+            orgs.push({
+              name: org.login,
+              description: org.description,
+              html_url: `https://github.com/${org.login}`,
+            });
+          });
+        };
+        return orgs;
+      });
+  };
 
   function handleChange(event) {
     const newUsername = event.target.value;
@@ -52,7 +79,7 @@ export const SearchBar = (props) => {
     }
     setUsername(event.target.value);
     setDisabled(isEmpty);
-  }
+  };
 
   return (
     <form onSubmit={handleSearch} autoComplete="off" className="search-bar-form">
@@ -84,4 +111,5 @@ export const SearchBar = (props) => {
 
 export default connect(null, {
   updateUserRepos,
+  updateUserOrgs,
 })(SearchBar);
