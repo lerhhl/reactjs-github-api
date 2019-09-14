@@ -15,6 +15,18 @@ export const SearchBar = (props) => {
   function handleSearch(event) {
     setDisabled(true);
     event.preventDefault();
+    Promise.all([fetchUserRepos()])
+      .then(responses => {
+        let repositories = responses[0];
+        props.updateUserRepos(repositories)
+        setDisabled(false)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function fetchUserRepos() {
     return axios.get(`https://api.github.com/users/${username}/repos`)
       .then((response) => {
         const repositoriesData = response.data;
@@ -28,11 +40,7 @@ export const SearchBar = (props) => {
             })
           })
         }
-        props.updateUserRepos(repositories)
-        setDisabled(false)
-      })
-      .catch((err) => {
-        console.log(err);
+        return repositories;
       });
   }
 
