@@ -39,9 +39,9 @@ export function ReposSection(props) {
             );
           })
         ) : (
-          <div className="no-repo-text">
+          <Typography className="no-repo-text">
             No repository
-          </div>
+          </Typography>
         )
       }
     </Paper>
