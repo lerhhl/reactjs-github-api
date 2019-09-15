@@ -33,11 +33,11 @@ jobs:
             - /home/circleci/.npm
       - run:
           name: Run Build
-          command: npm build
+          command: npm run build
       - persist_to_workspace:
           root: ./
           paths:
-            - public
+            - build
   deploy:
     docker:
       - image: circleci/node:10
@@ -52,7 +52,7 @@ jobs:
           command: sudo npm install -g --slient netlify-cli
       - run:
           name: Deploy to Netlify
-          command: netlify deploy --dir=./public -p
+          command: netlify deploy --dir=./build -p
 
 workflows:
   version: 2
