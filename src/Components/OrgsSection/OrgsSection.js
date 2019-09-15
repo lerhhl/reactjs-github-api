@@ -4,6 +4,7 @@ import {
   Paper,
   ListItem,
   ListItemText,
+  Typography,
 } from '@material-ui/core/';
 import "./OrgsSection.css";
 
@@ -18,18 +19,22 @@ export function OrgsSection(props) {
 
   return (
     <Paper className="orgs-section">
-      <h3>List of organisations ({orgs.length})</h3>
+      <Typography
+        noWrap
+        style={{fontWeight: "bold", fontSize: "1.17em", marginBottom: "1em", paddingLeft: 16, paddingRight: 16}}
+      >
+        {orgs.length} organisations
+      </Typography>
       { 
         orgs.length > 0 ? (
-          orgs.map((org, index) => {
+          orgs.map(org => {
             return (
               <ListItem
-                style={{paddingLeft: 0, paddingRight: 0}}
                 button
                 key={org.name}
                 onClick={() => handleClick(org.html_url)}
               >
-                <ListItemText primary={`${index + 1} ${org.name}`}/>
+                <ListItemText primary={org.name}/>
               </ListItem>
             );
           })

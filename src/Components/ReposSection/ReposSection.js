@@ -4,6 +4,7 @@ import {
   Paper,
   ListItem,
   ListItemText,
+  Typography,
 } from '@material-ui/core/';
 import "./ReposSection.css";
 
@@ -18,18 +19,23 @@ export function ReposSection(props) {
 
   return (
     <Paper className="repos-section">
-      <h3>List of repositories ({repos.length})</h3>
+      <Typography
+        noWrap
+        className="title"
+        style={{fontWeight: "bold", fontSize: "1.17em", marginBottom: "1em", paddingLeft: 16, paddingRight: 16}}
+      >
+        {repos.length} repositories
+      </Typography>
       { 
         repos.length > 0 ? (
-          repos.map((repo, index) => {
+          repos.map(repo => {
             return (
               <ListItem
-                style={{paddingLeft: 0, paddingRight: 0}}
                 button
                 key={repo.name}
                 onClick={() => handleClick(repo.html_url)}
               >
-                <ListItemText primary={`${index + 1} ${repo.name}`}/>
+                <ListItemText primary={repo.name}/>
               </ListItem>
             );
           })

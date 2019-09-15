@@ -28,7 +28,7 @@ describe("ReposSection", () => {
     wrapper = shallow(<ReposSection repos={reposList}/>);
     const ListItems = wrapper.find(Paper).find(ListItem);
     expect(ListItems.length).toBe(2);
-    expect(ListItems.find(ListItemText).at(0).props().primary).toBe(`1 ${reposList[0].name}`);
-    expect(ListItems.find(ListItemText).at(1).props().primary).toBe(`2 ${reposList[1].name}`);
+    expect(ListItems.find(ListItemText).at(0).props().primary).toBe(reposList[0].name);
+    expect(ListItems.find(ListItemText).at(1).props().primary).toBe(reposList[1].name);
   });
 });

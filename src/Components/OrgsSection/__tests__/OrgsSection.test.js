@@ -28,7 +28,7 @@ describe("OrgsSection", () => {
     wrapper = shallow(<OrgsSection orgs={orgsList}/>)
     const ListItems = wrapper.find(Paper).find(ListItem);
     expect(ListItems.length).toBe(2);
-    expect(ListItems.find(ListItemText).at(0).props().primary).toBe(`1 ${org1.name}`);
-    expect(ListItems.find(ListItemText).at(1).props().primary).toBe(`2 ${org2.name}`);
+    expect(ListItems.find(ListItemText).at(0).props().primary).toBe(org1.name);
+    expect(ListItems.find(ListItemText).at(1).props().primary).toBe(org2.name);
   });
 });
