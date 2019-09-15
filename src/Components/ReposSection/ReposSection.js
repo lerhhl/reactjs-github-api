@@ -21,8 +21,7 @@ export function ReposSection(props) {
     <Paper className="repos-section">
       <Typography
         noWrap
-        className="title"
-        style={{fontWeight: "bold", fontSize: "1.17em", marginBottom: "1em", paddingLeft: 16, paddingRight: 16}}
+        style={{fontWeight: "bold", fontSize: "1.17em", padding: 16}}
       >
         {repos.length} repositories
       </Typography>

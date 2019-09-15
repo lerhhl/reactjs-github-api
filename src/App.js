@@ -11,13 +11,13 @@ function App() {
   return (
     <Grid container spacing={2} justify="space-around" className="App">
       <Grid item xs={12} zeroMinWidth>
-        <Grid container spacing={2} >
+        <Grid container spacing={2}>
           <Grid item xs={12}>
             <SearchBar/>
           </Grid>
         </Grid>
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={12} zeroMinWidth>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
             <ReposSection/>

@@ -21,7 +21,7 @@ export function OrgsSection(props) {
     <Paper className="orgs-section">
       <Typography
         noWrap
-        style={{fontWeight: "bold", fontSize: "1.17em", marginBottom: "1em", paddingLeft: 16, paddingRight: 16}}
+        style={{fontWeight: "bold", fontSize: "1.17em", padding: 16}}
       >
         {orgs.length} organisations
       </Typography>
