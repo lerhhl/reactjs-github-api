@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   TextField,
   Button,
+  Typography,
 } from '@material-ui/core/';
 import axios from "axios";
 import { connect } from "react-redux";
@@ -14,6 +15,7 @@ import {
 export const SearchBar = (props) => {
   const [username, setUsername] = useState("");
   const [disabled, setDisabled] = useState(true);
+  const [message, setMessage] = useState("");
 
   function handleSearch(event) {
     setDisabled(true);
@@ -24,12 +26,14 @@ export const SearchBar = (props) => {
         let orgs = responses[1];
         props.updateUserRepos(repositories);
         props.updateUserOrgs(orgs);
+        setMessage("");
         setDisabled(false);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         props.updateUserRepos([]);
         props.updateUserOrgs([]);
+        setMessage("Username not found");
+        setDisabled(false);
       });
   };
 
@@ -105,6 +109,11 @@ export const SearchBar = (props) => {
       >
         Search
       </Button>
+      {message !== "" &&
+        <Typography style={{marginTop: 8, fontSize: "0.75rem", color: "#f44336"}}>
+          {message}
+        </Typography>
+      }
     </form>
   )
 }
