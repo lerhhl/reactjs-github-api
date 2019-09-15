@@ -39,9 +39,9 @@ export function OrgsSection(props) {
             );
           })
         ) : (
-          <div className="no-org-text">
+          <Typography className="no-org-text">
             No organisation
-          </div>
+          </Typography>
         )
       }
     </Paper>
