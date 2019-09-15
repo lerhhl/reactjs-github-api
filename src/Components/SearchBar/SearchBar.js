@@ -14,11 +14,11 @@ import {
 
 export const SearchBar = (props) => {
   const [username, setUsername] = useState("");
-  const [disabled, setDisabled] = useState(true);
+  const [buttonStatus, setButtonStatus] = useState({disabled: true, isSearching: false});
   const [message, setMessage] = useState("");
 
   function handleSearch(event) {
-    setDisabled(true);
+    setButtonStatus({disabled: true, isSearching: true});
     event.preventDefault();
     Promise.all([fetchUserRepos(), fetchUserOrgs()])
       .then(responses => {
@@ -27,13 +27,13 @@ export const SearchBar = (props) => {
         props.updateUserRepos(repositories);
         props.updateUserOrgs(orgs);
         setMessage("");
-        setDisabled(false);
+        setButtonStatus({disabled: false, isSearching: false});
       })
       .catch(() => {
         props.updateUserRepos([]);
         props.updateUserOrgs([]);
         setMessage("Username not found");
-        setDisabled(false);
+        setButtonStatus({disabled: false, isSearching: false});
       });
   };
 
@@ -82,7 +82,7 @@ export const SearchBar = (props) => {
       isEmpty = true
     }
     setUsername(newUsername);
-    setDisabled(isEmpty);
+    setButtonStatus({...buttonStatus, disabled: isEmpty});
   };
 
   return (
@@ -105,9 +105,9 @@ export const SearchBar = (props) => {
         color="primary"
         variant="contained"
         id="search-button"
-        disabled={disabled}
+        disabled={buttonStatus.disabled}
       >
-        Search
+        {buttonStatus.isSearching ? "Searching" : "Search"}
       </Button>
       {message !== "" &&
         <Typography style={{marginTop: 8, fontSize: "0.75rem", color: "#f44336"}}>
